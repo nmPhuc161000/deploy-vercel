@@ -1,0 +1,72 @@
+/* About.css */
+.change-password-section,
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+  }
+  
+  .about-info {
+    margin-bottom: 20px;
+  }
+  
+  .about-info h4 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  .password-input,
+  .about-info li .info-input {
+    background-color: #fff;
+    border-radius: 15px;
+    height: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .about-info li input {
+    width: calc(100% - 22px); /* Trừ đi kích thước của padding và border */
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  .save-button, .edit-button {
+    padding: 10px 20px;
+    margin-top: 45px;
+    margin-right: 80px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover, .edit-button:hover {
+    background-color: #0056b3;
+  }
+  .about-info li label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 17px;
+  }
+  .about-left,
+  .about-right {
+    float: left;
+    width: 40%; /* Giữ nguyên width */
+    margin-right: 10%; /* Giảm margin-right */
+  }
+  
+  

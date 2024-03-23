@@ -1,0 +1,95 @@
+.container-email {
+  margin: 0;
+  background-image: url("../../../../public/assets/image/imgBack.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 2);
+}
+
+.email {
+  background: transparent;
+  width: 550px;
+  height: 50%;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 2);
+  border-radius: 30px;
+  padding: 0px 30px;
+  box-shadow: 0 50px 150px #5533;
+  z-index: 2;
+  color: #fff;
+  backdrop-filter: blur(20px);
+}
+
+.email .input-field input{
+  width: 50%;
+  height: 50%;
+  background-color: #fff;
+  margin-left: 10px;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 2);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: black;
+  padding: 10px 10px 10px 10px;
+}
+
+.logoEmail img {
+  width: 100px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.emailotp .input-field {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  justify-content: center;
+}
+
+.input-field input {
+  height: 45px;
+  width: 42px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1.125rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+.emailotp button{
+  font-size: 16px;
+  background: #fff;
+  width: 100%;
+  height: 45px;
+  border-radius: 40px;
+  border: none;
+  outline: none;
+  color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.input-field input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.input-field input::-webkit-inner-spin-button,
+.input-field input::-webkit-outer-spin-button {
+  display: none;
+}
