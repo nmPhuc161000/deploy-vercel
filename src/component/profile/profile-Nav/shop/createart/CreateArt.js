@@ -218,7 +218,7 @@ export default function CreateArt({ onCreate }) {
                         src={imageUrl}
                         alt=""
                         style={{
-                          width: "310px",
+                          width: "300px",
                           height: "250px",
                           objectFit: "cover",
                           objectPosition: "50% 50%",
