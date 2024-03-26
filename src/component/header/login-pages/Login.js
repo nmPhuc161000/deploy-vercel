@@ -59,7 +59,7 @@ export default function Login() {
         icon: 'success',
         title: 'Login successful!',
         showConfirmButton: false,
-        timer: 2000 // Tắt sau 2 giây
+        timer: 1300 // Tắt sau 2 giây
       });
     } catch (error) {
       console.error(

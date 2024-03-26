@@ -12,7 +12,6 @@ import Profile from "./component/profile/Profile";
 import Payment from "./component/payment/Payment";
 import { SearchList } from "./component/header/search/searchlist/SearchList";
 import ChangePassword from "./component/change-password/ChangePassword";
-import EmailOTP from "./component/header/emailOTP/EmailOTP";
 import HomeAdmin from "./admin-page/homeadmin/HomeAdmin";
 import Request from "./component/Details/request/Request";
 import { CSSTransition } from "react-transition-group";
@@ -22,7 +21,6 @@ function App() {
   const [isLoginPage, setIsLoginPage] = useState(location.pathname === "/login");
   const [isRegisterPage, setIsRegisterPage] = useState(location.pathname === "/regis");
   const [isRecoveryPage, setIsRecoveryPage] = useState(location.pathname === "/recovery-password");
-  const [isEmailOTP, setIsEmailOTP] = useState(location.pathname === "/emailOTP");
   const [showFooter, setShowFooter] = useState(true);
   const [showHeader, setShowHeader] = useState(true);
   const isHomeAdmin = location.pathname.startsWith("/home-admin");
@@ -31,7 +29,6 @@ function App() {
     setIsLoginPage(location.pathname === "/login");
     setIsRegisterPage(location.pathname === "/regis");
     setIsRecoveryPage(location.pathname === "/recovery-password");
-    setIsEmailOTP(location.pathname === "/emailOTP");
   }, [location]);
 
   useEffect(() => {
@@ -39,17 +36,15 @@ function App() {
       !isLoginPage &&
       !isRegisterPage &&
       !isRecoveryPage &&
-      !isEmailOTP &&
       !isHomeAdmin
     );
     setShowHeader(
       !isLoginPage &&
       !isRegisterPage &&
       !isRecoveryPage &&
-      !isEmailOTP &&
       !isHomeAdmin
     );
-  }, [location, isLoginPage, isRegisterPage, isRecoveryPage, isEmailOTP, isHomeAdmin]);
+  }, [location, isLoginPage, isRegisterPage, isRecoveryPage, isHomeAdmin]);
 
   const [userById, setUserById] = useState([]);
 
@@ -60,7 +55,6 @@ function App() {
           isLoginPage={isLoginPage}
           isRegisterPage={isRegisterPage}
           isRecoveryPage={isRecoveryPage}
-          isEmailOTP={isEmailOTP}
           isHomeAdmin={isHomeAdmin}
         />
       )}
@@ -72,7 +66,6 @@ function App() {
         {/* header */}
         <Route path="/login"></Route>
         <Route path="/recovery-password" element={<RecoveryPassword />}></Route>
-        <Route path="/emailOTP" element={<EmailOTP />}></Route>
         <Route path="/regis"></Route>
         <Route path="/searchlist" element={<SearchList />}></Route>
         {/* detail */}
@@ -119,7 +112,6 @@ function App() {
           isLoginPage={isLoginPage}
           isRegisterPage={isRegisterPage}
           isRecoveryPage={isRecoveryPage}
-          isEmailOTP={isEmailOTP}
           isHomeAdmin={isHomeAdmin}
         />
       )}

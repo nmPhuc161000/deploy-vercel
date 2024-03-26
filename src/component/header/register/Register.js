@@ -118,7 +118,7 @@ export default function Register() {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Nickname,username or email already exists...",
+        title: "Nickname or username already exists...",
         text: error.response.data.message,
       });
       // Xử lý lỗi
@@ -138,7 +138,7 @@ export default function Register() {
           </div>
           <div className="title">Register Now!</div>
           <div className="group-regis">
-            <div className="group-left">
+            
               <div className="group-i">
                 <input
                   type="text"
@@ -163,8 +163,6 @@ export default function Register() {
                   {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </button>
               </div>
-            </div>
-            <div className="group-right">
               <div className="group-i">
                 <input
                   type="text"
@@ -186,11 +184,11 @@ export default function Register() {
                   onChange={handlePhoneNoChange}
                 />
               </div>
-            </div>
+            
           </div>
           <div className="Error" style={{}}>
             {errorMessage && (
-              <p style={{ color: "#e79494", margin: "0" }}>{errorMessage}</p>
+              <p style={{ color: "#512da8", margin: "0" }}>{errorMessage}</p>
             )}
           </div>
           <div className="signUp">
