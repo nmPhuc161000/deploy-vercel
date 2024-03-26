@@ -1,5 +1,5 @@
 // apiConfig.js
-const urlApi = 'https://localhost:44306';
+const urlApi = 'https://be-project-swp-artwork.azurewebsites.net';
 
 export default urlApi;
 
