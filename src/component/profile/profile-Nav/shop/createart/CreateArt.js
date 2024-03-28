@@ -117,6 +117,7 @@ export default function CreateArt({ onCreate }) {
         {
           headers: {
             "Content-Type": `application/json`,
+            Accept: "*/*",
             Authorization: `Bearer ${token}`,
           },
         }
