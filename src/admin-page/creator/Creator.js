@@ -1,56 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Creator.css';
-import urlApi from '../../configAPI/UrlApi';
-import { FaLock, FaUnlock } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Creator.css";
+import urlApi from "../../configAPI/UrlApi";
+import { FaLock, FaUnlock } from "react-icons/fa";
 
 function Creator() {
   const [users, setUsers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-
+  console.log("he:", users);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let storedUsers = localStorage.getItem('users');
-        if (storedUsers) {
-          storedUsers = JSON.parse(storedUsers);
-          setUsers(storedUsers);
-        } else {
-          const response = await axios.get(`${urlApi}/api/User/users`);
-          const allUsers = response.data;
-          const creatorUsers = allUsers.filter(user => user.roles.includes('CREATOR'));
-          setUsers(creatorUsers);
-          setIsAdmin(allUsers.some(user => user.roles.includes('ADMIN')));
-          localStorage.setItem('users', JSON.stringify(creatorUsers));
-        }
+        const response = await axios.get(
+          `${urlApi}/api/Admin/get-creator-list`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUsers(response.data);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
       }
     };
     fetchData();
   }, []);
+
   const token = localStorage.getItem("token");
   const handleStatusChange = async (userId, isActive) => {
     try {
-      await axios.patch(`${urlApi}/api/Admin/update-status-user?user_Id=${userId}`, { isActive }, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Gửi token trong header
-        },
-      });
-      const updatedUsers = users.map(user => {
+      await axios.patch(
+        `${urlApi}/api/Admin/update-status-user?user_Id=${userId}`,
+        { isActive },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Gửi token trong header
+          },
+        }
+      );
+      const updatedUsers = users.map((user) => {
         if (user.id === userId) {
           return { ...user, isActive: !isActive };
         }
         return user;
       });
       setUsers(updatedUsers);
-      localStorage.setItem('users', JSON.stringify(updatedUsers));
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
     } catch (error) {
-      console.error('Error updating status:', error);
+      console.error("Error updating status:", error);
     }
   };
+
   return (
-    <main className='main-container'>
+    <main className="main-container">
       <div className="main-title">
         <h4>CREATOR</h4>
       </div>
@@ -58,28 +61,36 @@ function Creator() {
         <div className="order">
           <div className="head">
             <h3>Registered Users</h3>
-            <i className='bx bx-search'></i>
-            <i className='bx bx-filter'></i>
+            <i className="bx bx-search"></i>
+            <i className="bx bx-filter"></i>
           </div>
           <table>
             <thead>
               <tr>
-                <th>User</th>
+                <th>Nick Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
                 <th>Date Registered</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {users.map(user => (
+              {users.map((user) => (
                 <tr key={user.id}>
                   <td>{user.nickName}</td>
-                  <td>{new Date(user.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phoneNumber}</td>
                   <td>
-                    <button onClick={() => handleStatusChange(user.id, user.isActive)}>
+                    {new Date(user.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleStatusChange(user.id, user.isActive)}
+                    >
                       {user.isActive ? <FaLock /> : <FaUnlock />}
                     </button>
                   </td>

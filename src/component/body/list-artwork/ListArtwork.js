@@ -95,74 +95,95 @@ export const ListArtwork = ({ itemData }) => {
           ))}
         </div>
       </div>
-      
-      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }} style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "25px"}}>
-          <Masonry columnsCount={3} gutter="10px" style={{width: "96%", gap : "0"}}>
-            {sortedItems.map((item, index) => (
-              <Link
-                to={item && item.id ? `/detail/${item.id}` : "/fallback-path"}
-                style={{ color: "black", display: "block",  margin: "0 4px", position: "relative"  }}
-                onMouseEnter={() => item && setHoveredItem(item)}
-                onMouseLeave={() => setHoveredItem(null)}
-              >
-                <img
-                  src={item.url_Image}
-                  key={index}
-                  alt=""
-                  style={{width: "100%", display: "block"}}
-                />
 
-                {hoveredItem === item && (
-                  <div
-                    className="image-info"
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "25px",
+        }}
+      >
+        <Masonry
+          columnsCount={3}
+          gutter="10px"
+          style={{ width: "96%", gap: "0" }}
+        >
+          {sortedItems.map((item, index) => (
+            <Link
+              to={item && item.id ? `/detail/${item.id}` : "/fallback-path"}
+              style={{
+                color: "black",
+                display: "block",
+                margin: "0 4px",
+                position: "relative",
+              }}
+              onMouseEnter={() => item && setHoveredItem(item)}
+              onMouseLeave={() => setHoveredItem(null)}
+            >
+              <img
+                src={item.url_Image}
+                key={index}
+                alt=""
+                style={{ width: "100%", display: "block" }}
+              />
+
+              {hoveredItem === item && (
+                <div
+                  className="image-info"
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0.4)",
+                    padding: "8px",
+                    position: "absolute",
+                    bottom: "0",
+                    left: "0",
+                    right: "0",
+                    color: "white",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <section
                     style={{
-                      backgroundColor: "rgba(0, 0, 0, 0.4)",
-                      padding: "8px",
-                      position: "absolute",
-                      bottom: "0",
-                      left: "0",
-                      right: "0",
-                      color: "white",
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "flex-end",
-                      justifyContent: "space-between",
+                      margin: "10px",
                     }}
                   >
-                    <section
-                      style={{
-                        margin: "10px",
-                      }}
-                    >
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>
-                          {item && item.name}
-                        </span>
-                      </p>
-                      <p>
-                        By:{" "}
-                        <span style={{ fontWeight: "bold" }}>
-                          {item && item.nick_Name}
-                        </span>
-                      </p>
-                    </section>
-                    <section
-                      style={{
-                        margin: "10px",
-                      }}
-                    >
-                      <p>
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>
+                        {item && item.name}
+                      </span>
+                    </p>
+                    <p>
+                      By:{" "}
+                      <span style={{ fontWeight: "bold" }}>
+                        {item && item.nick_Name}
+                      </span>
+                    </p>
+                  </section>
+                  <section
+                    style={{
+                      margin: "10px",
+                    }}
+                  >
+                    <p>
+                      {item && item.price !== 0 ? (
                         <span style={{ fontWeight: "bold" }}>
                           ${item && item.price}
                         </span>
-                      </p>
-                    </section>
-                  </div>
-                )}
-              </Link>
-            ))}
-          </Masonry>
-        </ResponsiveMasonry>
+                      ) : (
+                        <span style={{ fontWeight: "bold" }}>Free</span>
+                      )}
+                    </p>
+                  </section>
+                </div>
+              )}
+            </Link>
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
     </div>
   );
 };

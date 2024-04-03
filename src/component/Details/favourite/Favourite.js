@@ -46,6 +46,7 @@ export default function Favourite({ itemData }) {
           }
         );
         console.log("Removed from favorites successfully");
+        // setIsFavorite(false);
       }
 
       const newFavoriteState = !isFavorite;

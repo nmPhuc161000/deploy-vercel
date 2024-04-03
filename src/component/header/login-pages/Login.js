@@ -70,7 +70,7 @@ export default function Login() {
       Swal.fire({
         icon: 'error',
         title: 'Login failed!',
-        text: error.response.data.message
+        text: error.response.data,
       });
     }
     finally {
@@ -109,7 +109,7 @@ export default function Login() {
             </button>
           </div>
           <div className="recoveryPage">
-            <Link to="/recovery-password">Quên mật khẩu?</Link>
+            <Link to="/recovery-password">Forget Password?</Link>
           </div>
           <div className="signIn">
             <button type="submit">

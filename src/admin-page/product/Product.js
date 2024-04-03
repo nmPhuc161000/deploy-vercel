@@ -39,6 +39,7 @@ export default function Product() {
   const toggleFullscreen = (event) => {
     const imageElement = event.target; // Lấy phần tử ảnh được click
     if (imageElement) {
+      imageElement.style.objectFit = 'contain';
       // Kiểm tra xem trình duyệt có hỗ trợ API fullscreen không
       if (imageElement.requestFullscreen) {
         // Nếu fullscreen đang được bật, tắt fullscreen

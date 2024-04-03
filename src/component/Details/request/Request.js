@@ -5,14 +5,16 @@ import axios from "axios";
 import Sent from "./sent/Sent";
 
 export default function Request({ userById }) {
+  console.log(userById.nick_Name);
   const [username, setUsername] = useState([]);
   const [currentTab, setCurrentTab] = useState("unread");
+  const [nickName, setNickName] = useState(userById.nick_Name || "");
   const [mail, setMail] = useState("newRequest");
   const [email, setEmail] = useState(username.email || "");
   const [phoneNo, setPhoneNo] = useState(username.phoneNumber || "");
   const [text, setText] = useState("");
   const [updateData, setUpdateData] = useState([]);
-
+console.log(nickName);
   const token = localStorage.getItem("token");
 
   const handleTabClick = (tab) => {
@@ -21,6 +23,10 @@ export default function Request({ userById }) {
 
   const handleNewRequest = (tab) => {
     setMail(tab);
+  };
+
+  const handleNickname = (value) => {
+    setNickName(value);
   };
 
   const handleEmail = (value) => {
@@ -35,20 +41,19 @@ export default function Request({ userById }) {
     setText(value);
   };
 
-  const dataSend = {
-    email: email,
-    phoneNumber: phoneNo,
-    text: text,
-  };
-
   const handleSend = async () => {
+    const dataSend = {
+      email: email,
+      phoneNumber: phoneNo,
+      text: text,
+    };
     try {
       if (!text) {
         alert("Hãy nhập nội dung cần gửi trước khi gửi!!!");
         return;
       }
       const response = await axios.post(
-        `${urlApi}/api/RequestOrder/send-request?user_Id=${userById.user_Id}`,
+        `${urlApi}/api/RequestOrder/send-request?nick_Name=${nickName}`,
         dataSend,
         {
           headers: {
@@ -68,7 +73,7 @@ export default function Request({ userById }) {
         );
       }
     } catch (error) {
-      console.error("Error", error.request);
+      console.error("Error", error);
       alert("Failed to send!");
     }
   };
@@ -128,20 +133,43 @@ export default function Request({ userById }) {
             <div>
               {mail === "newRequest" ? (
                 <div className="boxRequest-mail">
-                  <section style={{ width: "90%", height: "90%" }}>
+                  <section
+                    style={{ width: "90%", height: "90%", marginTop: "15px" }}
+                  >
                     <section>
+                      <span
+                        style={{
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Sent to:
+                      </span>
                       <input
-                        placeholder="To"
                         type="text"
-                        value={userById.nick_Name}
+                        value={nickName}
+                        onChange={(e) => handleNickname(e.target.value)}
                       />
 
+                      <span
+                        style={{
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Email:
+                      </span>
                       <input
                         type="text"
                         value={email}
                         onChange={(e) => handleEmail(e.target.value)}
                       />
 
+                      <span
+                        style={{
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Phone number:
+                      </span>
                       <input
                         type="text"
                         value={phoneNo}
@@ -154,7 +182,9 @@ export default function Request({ userById }) {
                         onChange={(e) => handleText(e.target.value)}
                       />
                     </section>
-                    <section style={{ textAlign: "right", marginBottom: "20px" }}>
+                    <section
+                      style={{ textAlign: "right", marginBottom: "20px" }}
+                    >
                       <button
                         onClick={() => handleNewRequest("notMail")}
                         className={currentTab === "newRequest" ? "notMail" : ""}

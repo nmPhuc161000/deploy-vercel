@@ -135,9 +135,10 @@ export default function CreateArt({ onCreate }) {
       setIsPopupOpen(false);
       onCreate(response);
     } catch (error) {
+      // Xử lý lỗi
       console.log("URL", url);
       alert("Hãy kiểm tra lại thông tin nhập vào!");
-      console.error("Đã có lỗi xảy ra khi gửi yêu cầu API:", error.response);
+      console.error("Đã có lỗi xảy ra khi gửi yêu cầu API:", error);
       console.log(formData);
       setIsLoading(false);
     }
@@ -152,6 +153,7 @@ export default function CreateArt({ onCreate }) {
       navigate("/login");
     }
   }, [token, navigate]);
+
   return (
     <div className="createart">
       {isLogin && (

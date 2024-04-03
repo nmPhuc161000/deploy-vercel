@@ -1,18 +1,18 @@
 :root {
-	--poppins: 'Poppins', sans-serif;
-	--lato: 'Lato', sans-serif;
+  --poppins: "Poppins", sans-serif;
+  --lato: "Lato", sans-serif;
 
-	--light: #F9F9F9;
-	--blue: #3C91E6;
-	--light-blue: #CFE8FF;
-	--grey: #eee;
-	--dark-grey: #AAAAAA;
-	--dark: #342E37;
-	--red: #DB504A;
-	--yellow: #FFCE26;
-	--light-yellow: #FFF2C6;
-	--orange: #FD7238;
-	--light-orange: #FFE0D3;
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #cfe8ff;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --dark: #342e37;
+  --red: #db504a;
+  --yellow: #ffce26;
+  --light-yellow: #fff2c6;
+  --orange: #fd7238;
+  --light-orange: #ffe0d3;
 }
 .main-container {
   grid-area: main;
@@ -44,11 +44,10 @@
   flex-direction: column;
   color: white;
 }
-.text-ad p{
+.text-ad p {
   font-size: 20px; /* Kích thước lớn hơn */
   font-weight: bold; /* Chữ đậm */
 }
-
 
 .card_icon {
   width: 80px;
@@ -61,16 +60,16 @@
   color: white;
 }
 
-.card:first-child .card_icon{
-	color: var(--blue);
+.card:first-child .card_icon {
+  color: var(--blue);
 }
 
-.card:nth-child(2) .card_icon{
-	color: var(--yellow);
+.card:nth-child(2) .card_icon {
+  color: var(--yellow);
 }
 
-.card:nth-child(3) .card_icon{
-	color: var(--orange);
+.card:nth-child(3) .card_icon {
+  color: var(--orange);
 }
 
 .text-ad h3 {
@@ -92,7 +91,7 @@
   color: var(--dark);
 }
 
-.table-data>div {
+.table-data > div {
   border-radius: 20px;
   background: var(--light);
   padding: 24px;
@@ -133,6 +132,10 @@
   border-bottom: 1px solid var(--grey);
 }
 
+.table-data .order table th{
+  text-align: center;
+}
+
 .table-data .order table td {
   padding: 16px 0;
 }
@@ -140,6 +143,7 @@
 .table-data .order table tr td:first-child {
   display: flex;
   align-items: center;
+  justify-content: center;
   grid-gap: 12px;
   padding-left: 6px;
 }

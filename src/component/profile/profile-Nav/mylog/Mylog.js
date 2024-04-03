@@ -19,7 +19,7 @@ export default function Mylog() {
   }));
   return (
     <div className="mylog">
-      <Grid container spacing={2} sx={{width: "90%"}}>
+      <Grid container spacing={2} sx={{width: "95%"}}>
         <Grid xs={6} md={5}>
           <Item style={{
             display: "flex",

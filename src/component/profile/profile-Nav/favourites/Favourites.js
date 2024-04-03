@@ -29,6 +29,7 @@ export default function Favourites() {
     favouritesData();
   }, []);
   const [hoveredItem, setHoveredItem] = useState(null);
+  console.log(favourites);
   return (
     <div className="favourite">
       {/* hàm tạo ảnh và thêm thông tin */}
@@ -38,7 +39,7 @@ export default function Favourites() {
         </div>
 
         <ResponsiveMasonry
-          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
           style={{
             display: "flex",
             justifyContent: "center",
@@ -53,7 +54,11 @@ export default function Favourites() {
           >
             {favourites.map((item, index) => (
               <Link
-                to={item && item.id ? `/detail/${item.id}` : "/fallback-path"}
+                to={
+                  item && item.artwork_Id
+                    ? `/detail/${item.artwork_Id}`
+                    : "/fallback-path"
+                }
                 style={{
                   color: "black",
                   display: "block",
@@ -110,10 +115,14 @@ export default function Favourites() {
                       }}
                     >
                       <p>
+                      {item && item.price !== 0 ? (
                         <span style={{ fontWeight: "bold" }}>
                           ${item && item.price}
                         </span>
-                      </p>
+                      ) : (
+                        <span style={{ fontWeight: "bold" }}>Free</span>
+                      )}
+                    </p>
                     </section>
                   </div>
                 )}

@@ -91,8 +91,31 @@
 .product-info {
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.product-info .cateDes{
+  width: 70%;
+  margin-top: 15px;
+}
+
+.product-info .cateDes .category{
+  height: auto;
+}
+
+.product-info .cateDes .category p{
+  margin: 0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.product-info .cateDes .category span{
+  border: 0.5px solid rgb(192, 184, 184);
+  padding: 10px 15px;
+  background-color: white;
 }
 /* .author {
   width: 50x; Độ rộng của ảnh đại diện

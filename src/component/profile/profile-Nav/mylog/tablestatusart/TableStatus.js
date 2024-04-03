@@ -154,7 +154,7 @@ export default function TableStatus() {
                 <img
                   src={item.url_Image}
                   alt="Artwork"
-                  style={{ width: "50px", height: "60px" }}
+                  style={{ width: "50px", height: "60px", objectFit: "cover" }}
                 />
               </td>
               <td>{item.price}</td>

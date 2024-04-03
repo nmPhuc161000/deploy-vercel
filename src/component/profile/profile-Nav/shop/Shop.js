@@ -75,7 +75,7 @@ export const Shop = () => {
                       <img
                         src={item.url_Image}
                         alt=""
-                        style={{ height: "95%", width: "100%" }}
+                        style={{ height: "95%", width: "100%", objectFit: "cover" }}
                       />
                     </div>
                     <div className="cardInfor">

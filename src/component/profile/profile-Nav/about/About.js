@@ -63,25 +63,55 @@ export default function About({ userInfor, onUpdate }) {
       <div className="about-container">
         <div className="about-info">
           <h4>Thông tin cá nhân</h4>
-
+  
           <div>
-            {!isEditing ? (
-              <ul>
+            <ul>
+              <div className="about-left">
                 <li>
                   <label htmlFor="fullName">Nick Name:</label>
-                  <div className="info-input">{userInfor.nickName}</div>
+                  <div>
+                  <input
+                    type="text"
+                    value={nickName}
+                    placeholder="Nick name"
+                    onChange={(e) => handleFullNameChange(e.target.value)}
+                  />
+                  </div>
                 </li>
                 <li>
                   <label htmlFor="userName">Email:</label>
-                  <div className="info-input">{userInfor.email}</div>
+                  <div>
+                  <input
+                    type="text"
+                    value={email}
+                    placeholder="Email"
+                    onChange={(e) => handleEmailChange(e.target.value)}
+                  />
+                  </div>
                 </li>
                 <li>
+                  
                   <label htmlFor="address">Phone:</label>
-                  <div className="info-input">{userInfor.phoneNumber}</div>
+                  <div>
+                  <input
+                    type="text"
+                    value={phoneNumber}
+                    onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                  />
+                  </div>
                 </li>
+              </div>
+              <div className="about-right">
                 <li>
                   <label htmlFor="address">Address:</label>
-                  <div className="info-input">{userInfor.address}</div>
+                  <div>
+                  <input
+                    type="text"
+                    value={address}
+                    placeholder="Address"
+                    onChange={(e) => handleAddressChange(e.target.value)}
+                  />
+                  </div>
                 </li>
                 <li>
                   <label htmlFor="createdAt">Created At:</label>
@@ -93,50 +123,16 @@ export default function About({ userInfor, onUpdate }) {
                     })}
                   </div>
                 </li>
-              </ul>
-            ) : (
-              <div>
-                <input
-                  type="text"
-                  value={nickName}
-                  placeholder="Nick name"
-                  onChange={(e) => handleFullNameChange(e.target.value)}
-                />
-                <input
-                  type="text"
-                  value={email}
-                  placeholder="Email"
-                  onChange={(e) => handleEmailChange(e.target.value)}
-                />
-                <input
-                  type="text"
-                  value={address}
-                  placeholder="Address"
-                  onChange={(e) => handleAddressChange(e.target.value)}
-                />
-                <input
-                  type="text"
-                  value={phoneNumber}
-                  placeholder="Phone number"
-                  onChange={(e) => handlePhoneNumberChange(e.target.value)}
-                />
-                <div style={{ textAlign: "right" }}>
-                  <button onClick={handleSaveClick} className="edit-button">
-                    Lưu
-                  </button>
-                </div>
               </div>
-            )}
-            {!isEditing && (
-              <div style={{ textAlign: "right" }}>
-                <button className="edit-button" onClick={handleEditClick}>
-                  Edit
-                </button>
-              </div>
-            )}
+            </ul>
+            <div style={{ textAlign: "right" }}>
+              <button onClick={handleSaveClick} className="edit-button">
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  );  
 }

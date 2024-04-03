@@ -27,7 +27,8 @@ export default function DeleteArt({ ID }) {
       navigate("/profile/shop");
     } catch (error) {
       // Handle errors
-      console.error("Error deleting:", error);
+      console.error("Error deleting:", error.response);
+      alert(error.response.data);
     }
   };
   return (
@@ -68,7 +69,7 @@ export default function DeleteArt({ ID }) {
                 </div>
                 <div style={{ marginLeft: "15px" }}>
                   <div style={{ fontWeight: "bold", fontSize: "25px" }}>
-                    Delete this commission?
+                    Delete this artwork?
                   </div>
                 </div>
               </div>

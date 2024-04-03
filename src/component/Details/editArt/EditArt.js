@@ -18,7 +18,6 @@ export default function EditArt({ itemData, setUpdateState }) {
   const [categoryName, setCategoryName] = useState(
     itemData.category_Name || ""
   );
-  console.log(categoryName);
   const [description, setDescription] = useState(itemData.description || "");
   const [price, setPrice] = useState(itemData.price || "");
   const [image, setImage] = useState(itemData.url_Image || "");
@@ -130,8 +129,9 @@ export default function EditArt({ itemData, setUpdateState }) {
       setUpdateState(response);
     } catch (error) {
       // Handle errors
-      console.log(editData);
-      console.error("Error updating:", error);
+      console.error("Error updating:", error.response);
+      alert(error.response.data);
+      setIsLoading(false);
     }
   };
   return (

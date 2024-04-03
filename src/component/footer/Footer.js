@@ -1,8 +1,8 @@
 import React from 'react'
 import './Footer.css'
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
-function Footer({ isLoginPage, isRegisterPage,isRecoveryPage, isEmailOTP, isPayment }) { // Thêm isRegisterPage vào props
-  if (isLoginPage || isRegisterPage || isRecoveryPage || isEmailOTP || isPayment) { // Ẩn footer nếu là trang Login hoặc Register
+function Footer({ isLoginPage, isRegisterPage,isRecoveryPage, isEmailOTP, isPayment, isTransaction }) { // Thêm isRegisterPage vào props
+  if (isLoginPage || isRegisterPage || isRecoveryPage || isEmailOTP || isPayment || isTransaction) { // Ẩn footer nếu là trang Login hoặc Register
     return null;
   }
 
