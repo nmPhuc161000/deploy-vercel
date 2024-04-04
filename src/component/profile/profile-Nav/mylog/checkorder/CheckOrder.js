@@ -46,15 +46,16 @@ export default function CheckOrder({ id }) {
 
   if (isLoading) {
     return <div>You don't have any order</div>;
-  };
+  }
 
   // Nếu không có dữ liệu, hiển thị thông báo
   if (!dataRequestById) {
     return <div>Không có tin nhắn từ người khác</div>;
-  };
+  }
 
-  const isActive = dataRequestById.isActive; 
-  const isDeleted = dataRequestById.isDeleted
+  const isActive = dataRequestById.isActive;
+  const isDeleted = dataRequestById.isDeleted;
+  const statusRequest = dataRequestById.statusRequest;
 
   return (
     <div className="checkorder">
@@ -83,11 +84,18 @@ export default function CheckOrder({ id }) {
         </section>
       </div>
       {isActive ? (
-        <ButtonStatus setUpdateOrder={setUpdateOrder} id={id} isActive = {isActive} isDeleted = {isDeleted}/>
+        <ButtonStatus
+          setUpdateOrder={setUpdateOrder}
+          id={id}
+          isActive={isActive}
+          isDeleted={isDeleted}
+        />
       ) : (
-        <UpdateStaus setUpdateOrder={setUpdateOrder} dataRequestById={dataRequestById}/>
+        <UpdateStaus
+          setUpdateOrder={setUpdateOrder}
+          dataRequestById={dataRequestById}
+        />
       )}
-      
     </div>
   );
 }

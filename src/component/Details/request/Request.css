@@ -2,11 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+
+  margin-top: 15px;
 }
 
 .request .request-content {
   width: 95%;
+  background-color: white;
+  box-shadow: 0 3px 20px 0 rgb(221 209 209 / 20%),
+    0 3px 20px 0 rgb(120 105 105 / 19%);
 }
 
 .request .request-content .content-title {
@@ -38,7 +42,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 90vh;
+  min-height: 70vh;
   margin-top: 50px;
 }
 
@@ -86,7 +90,7 @@
 .box-request ul li {
   box-shadow: 0 3px 20px 0 rgb(221 209 209 / 20%),
     0 3px 20px 0 rgb(120 105 105 / 19%);
-    margin: 15px;
+  margin: 15px;
 }
 
 .box-request ul #li1 {
@@ -104,10 +108,13 @@
 }
 
 .boxRequest-notMail {
-  height: 500px;
+  min-height: 450px;
   width: 100%;
   box-shadow: 0 3px 20px 0 rgb(221 209 209 / 20%),
     0 3px 20px 0 rgb(120 105 105 / 19%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .boxRequest-mail {

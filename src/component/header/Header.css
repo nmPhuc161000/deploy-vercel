@@ -57,3 +57,13 @@
 .sort {
     margin-left: 10px;
 }
+
+.navbar .regisLogin .emailIcon {
+    width: 50px;
+    height: 30px;
+}
+
+
+.navbar .regisLogin .emailIcon a {
+    color: black;
+}

@@ -4,9 +4,17 @@ import "./Header.css";
 import SearchBar from "./search/searchbar/SearchBar";
 import Avatar from "./avtaruser/Avatar";
 import Order from "./order/Order";
+import EmailIcon from "@mui/icons-material/Email";
 
-export default function Header({ isLoginPage, isRegisterPage,isRecoveryPage, isEmailOTP, isHomeAdmin }) {
-  const urlLogo = "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2Ffeed6075-55fd-4fb3-98d4-946d30029eda?alt=media&token=a3dd9363-73f3-4aec-ae32-264c761a0c0f";
+export default function Header({
+  isLoginPage,
+  isRegisterPage,
+  isRecoveryPage,
+  isEmailOTP,
+  isHomeAdmin,
+}) {
+  const urlLogo =
+    "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2Ffeed6075-55fd-4fb3-98d4-946d30029eda?alt=media&token=a3dd9363-73f3-4aec-ae32-264c761a0c0f";
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   useEffect(() => {
@@ -15,7 +23,14 @@ export default function Header({ isLoginPage, isRegisterPage,isRecoveryPage, isE
       setIsLoggedIn(false);
     }
   }, []);
-  if (isLoginPage || isRegisterPage || isRecoveryPage || isEmailOTP || isHomeAdmin) { // Ẩn header nếu là trang Login hoặc Register
+  if (
+    isLoginPage ||
+    isRegisterPage ||
+    isRecoveryPage ||
+    isEmailOTP ||
+    isHomeAdmin
+  ) {
+    // Ẩn header nếu là trang Login hoặc Register
     return null;
   }
 
@@ -26,8 +41,7 @@ export default function Header({ isLoginPage, isRegisterPage,isRecoveryPage, isE
           <div className="search">
             <SearchBar />
           </div>
-          <div className="sort">
-          </div>
+          <div className="sort"></div>
           <div className="logo">
             <Link to={`/`}>
               <img src={urlLogo} alt="Logo" />
@@ -40,11 +54,20 @@ export default function Header({ isLoginPage, isRegisterPage,isRecoveryPage, isE
                   <button>Login</button>
                 </Link>
                 <Link to={`/regis`}>
-                  <button >Register</button>
+                  <button>Register</button>
                 </Link>
               </>
             )}
-            <Order/>
+            {!isLoggedIn && (
+              <>
+                <div className="emailIcon">
+                  <Link to={"/request"}>
+                    <EmailIcon />
+                  </Link>
+                </div>
+                <Order />
+              </>
+            )}
             <Avatar />
           </div>
         </div>

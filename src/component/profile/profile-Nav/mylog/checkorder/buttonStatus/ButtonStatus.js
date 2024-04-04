@@ -40,6 +40,7 @@ export default function ButtonStatus({ id, isActive, isDeleted, setUpdateOrder }
       alert("Accept request successful!");
     } catch (error) {
       console.log(error.request);
+      alert(error.response.data);
     }
   };
   return (

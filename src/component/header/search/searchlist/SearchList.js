@@ -6,13 +6,15 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import urlApi from "../../../../configAPI/UrlApi";
+import axios from "axios";
 
 export const SearchList = () => {
   const { state } = useLocation();
   const responseData = state && state.searchData;
   const responseDataArray = Array.isArray(responseData) ? responseData : [];
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const categories = ["Dragon", "Galaxy", "AI", "Landscape", "Fantasy", "Home"];
+  // const categories = ["Dragon", "Galaxy", "AI", "Landscape", "Fantasy", "Home"];
   const [sortBy, setSortBy] = useState(null);
 
   const handleCategoryClick = (category) => {
@@ -38,6 +40,22 @@ export const SearchList = () => {
     }
     return 0; // Không sắp xếp
   });
+
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const categoriesData = async () => {
+      try {
+        const response = await axios.get(
+          `${urlApi}/api/Category/get-all-category`
+        );
+        setCategories(response.data);
+        localStorage.setItem("categories", response.data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    categoriesData();
+  }, []);
 
   const [hoveredItem, setHoveredItem] = useState(null);
 
@@ -77,9 +95,9 @@ export const SearchList = () => {
           {categories.map((category, index) => (
             <button
               key={index}
-              onClick={() => handleCategoryClick(category)}
+              onClick={() => handleCategoryClick(category.name)}
               style={{
-                fontWeight: category === selectedCategory ? "bold" : "normal",
+                fontWeight: category.name === selectedCategory ? "bold" : "normal",
                 marginLeft: "10px",
                 border: "1px solid #b6b7be",
                 borderRadius: "4px",
@@ -90,7 +108,7 @@ export const SearchList = () => {
                 fontSize: "17px",
               }}
             >
-              {category}
+              {category.name}
             </button>
           ))}
         </div>

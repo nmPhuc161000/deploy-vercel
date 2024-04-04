@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./CreatrArt.css";
+import "./CreateArt.css";
 import urlApi from "../../../../../configAPI/UrlApi";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";

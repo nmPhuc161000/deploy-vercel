@@ -1,26 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import "./Payment.css";
-import urlApi from "../../configAPI/UrlApi";
+import React, { useEffect, useState } from "react";
+
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
+import urlApi from "../../../../configAPI/UrlApi";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Payment = ({ userById }) => {
-  const [imageSize, setImageSize] = useState(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export default function PaymentRequest({dataReqId}) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [showPaymentInfo, setShowPaymentInfo] = useState(false);
   const [dataPay, setDataPay] = useState(null);
   const [selfLink, setSelfLink] = useState("");
   const [approveLink, setApproveLink] = useState("");
   const [status, setStatus] = useState([]);
-  const [isPaid, setIsPaid] = useState(false);
   const token = localStorage.getItem("token");
 
   //Create payment
   const handlePaypalClick = async () => {
     try {
       const response = await axios.post(
-        `${urlApi}/api/Payment/create-payment?artwork_Id=${userById.id}`,
+        `${urlApi}/api/RequestOrder/create-payment-request?request_Id=${dataReqId.id}`,
         {},
         {
           headers: {
@@ -57,8 +80,6 @@ const Payment = ({ userById }) => {
       console.error("No approve link found in the response.");
     }
   };
-
-  const navigate = useNavigate();
 
   //self link (link 1)
   useEffect(() => {
@@ -97,7 +118,7 @@ const Payment = ({ userById }) => {
       const dataCapture = async () => {
         try {
           const response = await axios.post(
-            `${urlApi}/api/Payment/capture-payment?orderId=${dataPay.order.id}&artwork_Id=${userById.id}`,
+            `${urlApi}/api/RequestOrder/capture-payment-request?orderId=${dataPay.order.id}&request_Id=${dataReqId.id}`,
             {},
             {
               headers: {
@@ -108,7 +129,6 @@ const Payment = ({ userById }) => {
           );
           console.log(response);
           if (response) {
-            setIsPaid(true);
             Swal.fire({
               icon: "success",
               title: "Payment successful!",
@@ -116,11 +136,12 @@ const Payment = ({ userById }) => {
               timer: 4000,
               confirmButtonText: "OK",
               didClose: () => {
-                navigate(`/success-page`);
+                setOpen(false);
               },
             });
             console.log("data: ", response.data);
             localStorage.setItem("order_Id", response.data.order_Id)
+            alert("Payment successful!");
           } else {
             Swal.fire({
               icon: "error",
@@ -130,6 +151,7 @@ const Payment = ({ userById }) => {
               showConfirmButton: false,
               timer: 4000,
             });
+            alert("Payment failure!");
           }
         } catch (error) {
           console.log(error);
@@ -142,71 +164,73 @@ const Payment = ({ userById }) => {
             showConfirmButton: false,
             timer: 4000,
           });
+          alert("Payment failure!");
         }
       };
       dataCapture();
     }
   }, [status]);
 
-  useEffect(() => {
-    console.log("Payment component mounted");
-    const loadImage = async () => {
-      const img = new Image();
-      img.onload = function () {
-        setImageSize({ width: this.width, height: this.height });
-        setImageLoaded(true);
-      };
-      img.src = decodeURIComponent(userById.url_Image);
-    };
-    loadImage();
-  }, [userById.url_Image]);
-
   return (
-    <div className="PaymentPage">
-      <div className="container-payment">
-        <div className="center">
-          <h3>Choose Payment Method</h3>
-          <div className="pay">
-            <button onClick={handlePaypalClick}>
-              <img
-                src="https://i.ibb.co/KVF3mr1/paypal.png"
-                alt="Paypal Logo"
-                className="paypal-logo"
-              />
-              <p className="name">Paypal</p>
-            </button>
-          </div>
-          {showPaymentInfo /* Hiển thị thông tin khi showPaymentInfo là true */ && (
-            <div className="card-details">
-              <h4>You’ll be redirected to PayPal to complete this payment.</h4>
-              <div>
-                <button onClick={handleProceedToPayment}>
-                  Buy
-                </button>
+    <div
+      style={{
+        textAlign: "right",
+      }}
+    >
+      <React.Fragment>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Payment
+        </Button>
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar sx={{ position: "relative" }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Payment request
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <div className="PaymentPage">
+            <div className="container-payment">
+              <div className="center">
+                <h3>Choose Payment Method</h3>
+                <div className="pay">
+                  <button onClick={handlePaypalClick}>
+                    <img
+                      src="https://i.ibb.co/KVF3mr1/paypal.png"
+                      alt="Paypal Logo"
+                      className="paypal-logo"
+                    />
+                    <p className="name">Paypal</p>
+                  </button>
+                </div>
+                {showPaymentInfo /* Hiển thị thông tin khi showPaymentInfo là true */ && (
+                  <div className="card-details">
+                    <h4>
+                      You’ll be redirected to PayPal to complete this payment.
+                    </h4>
+                    <div>
+                      <button onClick={handleProceedToPayment}>Buy</button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          )}
-        </div>
-        <div className="right">
-          <div className="price-info">
-            <p>Summary</p>
           </div>
-          {imageLoaded && (
-            <div className="details-img">
-              <img src={userById.url_Image} alt="Product" />
-              <p>
-                Image Size: {imageSize.width}x{imageSize.height}
-              </p>
-            </div>
-          )}
-          <div className="total">
-            <p>Name of artwork: {userById.name}</p>
-            <p>Total: <strong>${userById.price}</strong></p>
-          </div>
-        </div>
-      </div>
+        </Dialog>
+      </React.Fragment>
     </div>
   );
-};
-
-export default Payment;
+}

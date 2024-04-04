@@ -4,7 +4,7 @@ import urlApi from "../../../../configAPI/UrlApi";
 import axios from "axios";
 import DeleteSent from "./deleteSent/DeleteSent";
 
-export default function Sent({ username, updateData }) {
+export default function Sent({ username, updateData, onLiClick }) {
   const [hasData, setHasData] = useState(false);
   const [sent, setSent] = useState([]);
   const token = localStorage.getItem("token");
@@ -26,6 +26,7 @@ export default function Sent({ username, updateData }) {
           if (Array.isArray(response.data)) {
             setHasData(true);
             setSent(response.data);
+            console.log(response.data);
           } else {
             // Nếu response.data không phải là mảng, xử lý tương ứng
             console.error("Dữ liệu trả về không phải là mảng");
@@ -51,7 +52,12 @@ export default function Sent({ username, updateData }) {
       {hasData && sent.length > 0 ? (
         <>
           {sent.map((note) => (
-            <li key={note} className="liSent">
+            <li
+              key={note.id}
+              className="liSent"
+              onClick={() => onLiClick(note.id)}
+              style={{ cursor: "pointer" }}
+            >
               <div id="div1">
                 <section
                   style={{
@@ -73,11 +79,17 @@ export default function Sent({ username, updateData }) {
                   </div>
                   <div>
                     <p style={{ margin: "0", marginBottom: "5px" }}>
-                      <strong>
-                        {getStatus(note.isActive, note.isDeleted)}
-                      </strong>
+                      {note.isSendResult === true ? (
+                        <strong>Sent result</strong>
+                      ) : (
+                        <strong>
+                          {getStatus(note.isActive, note.isDeleted)}
+                        </strong>
+                      )}
                     </p>
-                    {!note.isActive && <strong>{note.statusRequest}</strong>}
+                    <p style={{ margin: "0", textAlign: "right", color: "black" }}>
+                      {!note.isActive && <strong>{note.statusRequest}</strong>}
+                    </p>
                   </div>
                 </section>
                 <section
@@ -88,7 +100,9 @@ export default function Sent({ username, updateData }) {
                   }}
                 >
                   <p style={{ textAlign: "left" }}>{note.text}</p>
-                  <DeleteSent note={note} setUpdateDe={setUpdateDe} />
+                  {note.isActive && (
+                    <DeleteSent note={note} setUpdateDe={setUpdateDe} />
+                  )}
                 </section>
               </div>
             </li>

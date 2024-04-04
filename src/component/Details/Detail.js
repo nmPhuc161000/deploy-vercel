@@ -30,17 +30,6 @@ export default function Detail({ setUserById, statusPay }) {
     }
   }, [token]);
 
-  // const handleCommentChange = (event) => {
-  //   setComment(event.target.value);
-  // };
-
-  // const handleCommentSubmit = () => {
-  //   // Logic for submitting comment
-  //   console.log("Comment submitted:", comment);
-  //   // Close the modal after submitting comment
-  //   setIsCommentModalOpen(false);
-  // };
-
   const toggleFullscreen = () => {
     const imageElement = document.querySelector(".product-tumb img"); // Lấy phần tử ảnh
     if (imageElement) {
@@ -137,8 +126,6 @@ export default function Detail({ setUserById, statusPay }) {
 
     fetchUserData();
   }, []);
-
-  console.log(itemData);
 
   const formatFileName = (name) => {
     return name.toLowerCase().replace(/ /g, "_");
