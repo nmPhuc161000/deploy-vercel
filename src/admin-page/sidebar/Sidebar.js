@@ -34,7 +34,7 @@ export default function Sidebar() {
         });
       });
     }
-  }, [])
+  }, []);
 
   return (
     <section id="sidebar" className="sidebar">
@@ -42,12 +42,14 @@ export default function Sidebar() {
         <BsEmojiSmile className="bx bxs-smile" />
         <span className="text">AdminHub</span>
       </a>
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "90%"
-      }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "90%",
+        }}
+      >
         <ul className="side-menu top">
           <li class="active">
             <Link to={"/home-admin/dashboard"}>
@@ -62,10 +64,10 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
-            <a href="#">
-              <BsFillGrid3X3GapFill className="bx bxs-category" />
-              <span className="text">Category</span>
-            </a>
+            <Link to={"/home-admin/revenue"}>
+              <BsFillGrid3X3GapFill className="bx bxs-revenue" />
+              <span className="text">Revenue</span>
+            </Link>
           </li>
           <li>
             <a href="#">
@@ -74,7 +76,7 @@ export default function Sidebar() {
             </a>
           </li>
           <li>
-          <Link to={"/home-admin/creator"}>
+            <Link to={"/home-admin/creator"}>
               <BsPeopleFill className="bx bxs-cogs" />
               <span className="text">Creator</span>
             </Link>

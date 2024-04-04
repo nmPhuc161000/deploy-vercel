@@ -1,45 +1,37 @@
 import React, { useEffect, useState } from "react";
-import "./Product.css";
+import "./Revenue.css";
 import axios from "axios";
 import urlApi from "../../configAPI/UrlApi";
-import CheckArt from "./checkArt/CheckArt";
 
-export default function Product() {
-  const [dataProduct, setDataProduct] = useState([]);
+export default function Revenue() {
+  const [dataRevenues, setDataRevenues] = useState([]);
 
   const token = localStorage.getItem("token");
+
   useEffect(() => {
-    const productData = async () => {
+    const revenues = async () => {
       try {
-        const response = await axios.get(
-          `${urlApi}/api/Admin/get-artwork-for-admin`,
+        const dataRevenue = await axios.get(
+          `${urlApi}/api/Admin/get-user-revenue`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        console.log(response.data);
-        setDataProduct(response.data);
+        console.log(dataRevenue.data);
+        setDataRevenues(dataRevenue.data);
       } catch (error) {
-        console.error(error.request);
+        console.error(error.response);
       }
     };
-    productData();
+    revenues();
   }, []);
-
-  const getStatus = (isActive, isDeleted) => {
-    if (isDeleted) {
-      return "Bị từ chối";
-    } else {
-      return isActive ? "Được chấp nhận" : "Đang xử lý";
-    }
-  };
 
   const toggleFullscreen = (event) => {
     const imageElement = event.target; // Lấy phần tử ảnh được click
     if (imageElement) {
-      imageElement.style.objectFit = 'contain';
+      imageElement.style.objectFit = "contain";
       // Kiểm tra xem trình duyệt có hỗ trợ API fullscreen không
       if (imageElement.requestFullscreen) {
         // Nếu fullscreen đang được bật, tắt fullscreen
@@ -56,50 +48,48 @@ export default function Product() {
       alert("Image element not found.");
     }
   };
-  
+
   return (
     <main className="main-container">
       <div className="main-title">
-        <h4>PRODUCTS</h4>
+        <h4>Revenue</h4>
       </div>
 
       <div class="table-data-product">
         <div class="order">
           <div class="head">
-            <h3>Recent Orders</h3>
+            <h3>User Revenue</h3>
             <i class="bx bx-search"></i>
             <i class="bx bx-filter"></i>
           </div>
           <table>
             <thead>
               <tr>
-                <th>Creator Name</th>
+                <th>ID</th>
                 <th>Image</th>
-                <th>Date Order</th>
+                <th>Name Seller</th>
+                <th>Name buyer</th>
+                <th>Purchase date</th>
                 <th>Price</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Accept | Cancel</th>
               </tr>
             </thead>
             <tbody>
-              {dataProduct.map((item) => (
+              {dataRevenues.map((item, index) => (
                 <tr>
-                  <td>{item.nick_Name}</td>
+                  <td>{index + 1}</td>
+                  <td>{item.nickName_Seller}</td>
+                  <td>{item.nickNme_Buyer}</td>
                   <td onClick={toggleFullscreen}>
                     <img src={item.url_Image} alt="image" />
                   </td>
                   <td>
-                    {new Date(item.createdAt).toLocaleDateString("en-US", {
+                    {new Date(item.purchase_Date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
                     })}
                   </td>
                   <td>${item.price}</td>
-                  <td><textarea value={item.description}/></td>
-                  <td>{getStatus(item.isActive, item.isDeleted)}</td>
-                  <td><CheckArt item={item}/></td>
                 </tr>
               ))}
             </tbody>

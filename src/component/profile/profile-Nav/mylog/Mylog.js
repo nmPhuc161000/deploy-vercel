@@ -20,14 +20,14 @@ export default function Mylog() {
   return (
     <div className="mylog">
       <Grid container spacing={2} sx={{width: "95%"}}>
-        <Grid xs={6} md={5}>
+        <Grid xs={6} md={4}>
           <Item style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center"
           }}><CheckOrder id={id}/></Item>
         </Grid>
-        <Grid xs={6} md={7}>
+        <Grid xs={6} md={8}>
           <Item><TableStatus/></Item>
         </Grid>
       </Grid>

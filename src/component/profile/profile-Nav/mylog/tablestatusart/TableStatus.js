@@ -97,6 +97,14 @@ export default function TableStatus() {
     }
   };
 
+  const checkStatus = (isPayment) => {
+    if (isPayment === false) {
+      return "Available";
+    } else {
+      return "Sold";
+    }
+  };
+
   return (
     <div className="table">
       <table>
@@ -107,10 +115,11 @@ export default function TableStatus() {
             <th>Price</th>
             <th>Reason Refuse</th>
             <th>Status</th>
+            <th>Sold</th>
             <th
               style={{
                 width: "85px",
-                height: "60px"
+                height: "60px",
               }}
             >
               {isAnyArtworkSelected ? (
@@ -157,17 +166,39 @@ export default function TableStatus() {
                   style={{ width: "50px", height: "60px", objectFit: "cover" }}
                 />
               </td>
-              <td>{item.price}</td>
+              <td>
+                {item && item.price !== 0 ? (
+                  <span style={{ fontWeight: "bold" }}>
+                    ${item && item.price}
+                  </span>
+                ) : (
+                  <span style={{ fontWeight: "bold" }}>Free</span>
+                )}
+              </td>
               <td>{item.reasonRefuse}</td>
               <td>{getStatus(item.isActive, item.isDeleted)}</td>
               <td>
-                <IconButton onClick={() => handleSelectArtwork(item.id)}>
-                  {selectedArtworks.includes(item.id) ? (
-                    <CheckBoxIcon style={{color: "#9195F6"}}/>
-                  ) : (
-                    <CheckBoxOutlineBlankIcon />
-                  )}
-                </IconButton>
+                {item.price !== 0 ? (
+                
+                checkStatus(item.isPayment)
+                ) : (
+                  <span>Free</span>
+                )}
+                </td>
+              <td>
+                {item.isPayment === false || item.price === 0 ? (
+                  <IconButton onClick={() => handleSelectArtwork(item.id)}>
+                    {selectedArtworks.includes(item.id) ? (
+                      <CheckBoxIcon style={{ color: "#9195F6" }} />
+                    ) : (
+                      <CheckBoxOutlineBlankIcon />
+                    )}
+                  </IconButton>
+                ) : (
+                  <section className="sold">
+                    <CheckBoxIcon />
+                  </section>
+                )}
               </td>
             </tr>
           ))}

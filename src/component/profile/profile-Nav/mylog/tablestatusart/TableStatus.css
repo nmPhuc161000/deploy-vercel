@@ -19,3 +19,7 @@
 .table td {
   text-align: center;
 }
+
+.table table tbody td .sold {
+  color: rgb(179, 164, 164);
+} 

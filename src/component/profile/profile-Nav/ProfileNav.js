@@ -45,6 +45,14 @@ export default function ProfileNav() {
               MyLog
             </Link>
           </li>
+          <li className={activeLink === "/profile/saleHistory" ? "active" : ""}>
+            <Link
+              to="/profile/saleHistory"
+              onClick={() => handleLinkClick("/profile/saleHistory")}
+            >
+              Sale History
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

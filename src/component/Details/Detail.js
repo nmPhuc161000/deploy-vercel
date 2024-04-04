@@ -140,6 +140,10 @@ export default function Detail({ setUserById, statusPay }) {
 
   console.log(itemData);
 
+  const formatFileName = (name) => {
+    return name.toLowerCase().replace(/ /g, "_");
+  };
+
   const downloadImage = async () => {
     try {
       const response = await axios.get(
@@ -148,7 +152,7 @@ export default function Detail({ setUserById, statusPay }) {
       );
       const blob = response.data;
       // Xác định hậu tố cho tên tệp
-      const filename = `${itemData.name}.jpg`; // thay đổi 'yourfilename.jpg' thành hậu tố mong muốn
+      const filename = `${formatFileName(itemData.name)}.jpg`; // thay đổi 'yourfilename.jpg' thành hậu tố mong muốn
       // Tạo URL cho Blob với hậu tố tệp
       const imageUrl = URL.createObjectURL(
         new Blob([blob], { type: "image/jpeg" })
