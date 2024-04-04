@@ -70,16 +70,6 @@ export default function Register() {
       setIsLoading(false);
       return;
     }
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
-    if (!emailPattern.test(email)) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please enter a valid Gmail email address!",
-      });
-      setIsLoading(false);
-      return;
-    }
 
     if (
       password.length < 8 ||

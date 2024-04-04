@@ -19,8 +19,8 @@
 .container-card {
   background: var(--g-theme-primary);
   box-sizing: border-box;
-  padding-bottom: 50px;
   position: relative;
+  margin-top: 20px;
 }
 
 .product-card {
@@ -109,7 +109,7 @@
   margin: 0;
   margin-bottom: 20px;
   font-weight: 700;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .product-info .cateDes .category span{

@@ -19,7 +19,7 @@ export default function EditArt({ itemData, setUpdateState }) {
     itemData.category_Name || ""
   );
   const [description, setDescription] = useState(itemData.description || "");
-  const [price, setPrice] = useState(itemData.price || "");
+  const [price, setPrice] = useState(itemData.price || 0);
   const [image, setImage] = useState(itemData.url_Image || "");
   const [imageFile, setImageFile] = useState(null);
   const [imgUrl, setImgUrl] = useState([]);
@@ -129,8 +129,8 @@ export default function EditArt({ itemData, setUpdateState }) {
       setUpdateState(response);
     } catch (error) {
       // Handle errors
-      console.error("Error updating:", error.response);
-      alert(error.response.data);
+      console.error("Error updating:", error.response.data.title);
+      alert("Something wrong when you update");
       setIsLoading(false);
     }
   };
@@ -279,7 +279,7 @@ export default function EditArt({ itemData, setUpdateState }) {
                   <div className="popupInput">
                     <input
                       type="number"
-                      placeholder="Enter price of artwork ($)"
+                      placeholder="Enter price of artwork ($) *"
                       value={price}
                       onChange={(e) => handlePrice(e.target.value)}
                       min="0"
