@@ -115,7 +115,8 @@
 .product-info .cateDes .category span{
   border: 0.5px solid rgb(192, 184, 184);
   padding: 10px 15px;
-  background-color: white;
+  background-color: transparent;
+  border-radius: 20px;
 }
 /* .author {
   width: 50x; Độ rộng của ảnh đại diện

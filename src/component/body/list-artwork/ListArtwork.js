@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import axios from "axios";
 import urlApi from "../../../configAPI/UrlApi";
+import './ListArtwork.css'
 
 export const ListArtwork = ({ itemData }) => {
   console.log(itemData);
@@ -52,6 +53,20 @@ export const ListArtwork = ({ itemData }) => {
     return 0; // Không sắp xếp
   });
 
+  const showScrollBar = () => {
+    const container = document.querySelector(".scroll-container");
+    if (container) {
+      container.style.overflowX = "auto";
+    }
+  };
+
+  const hideScrollBar = () => {
+    const container = document.querySelector(".scroll-container");
+    if (container) {
+      container.style.overflowX = "hidden";
+    }
+  };
+
   return (
     <div
       className="container-fluid"
@@ -68,7 +83,14 @@ export const ListArtwork = ({ itemData }) => {
           justifyContent: "center",
         }}
       >
-        <div style={{ width: "90%", marginBottom: "5px", height: "40px" }}>
+        <div
+          style={{
+            width: "90%",
+            marginBottom: "5px",
+            height: "40px",
+            display: "flex",
+          }}
+        >
           <FormControl
             sx={{ m: 1, minWidth: 120, margin: 0 }}
             style={{ height: "100%" }}
@@ -89,26 +111,32 @@ export const ListArtwork = ({ itemData }) => {
               <MenuItem value={"desc"}>Decrease</MenuItem>
             </Select>
           </FormControl>
-          {categories.map((category, index) => (
-            <button
-              key={index}
-              onClick={() => handleCategoryClick(category.name)}
-              style={{
-                fontWeight:
-                  category.name === selectedCategory ? "bold" : "normal",
-                marginLeft: "10px",
-                border: "1px solid #b6b7be",
-                borderRadius: "4px",
-                backgroundColor: "white",
-                padding: "5px 15px",
-                cursor: "pointer",
-                height: "100%",
-                fontSize: "17px",
-              }}
-            >
-              {category.name}
-            </button>
-          ))}
+          <div
+            className="scroll-container"
+            onMouseOver={showScrollBar}
+            onMouseOut={hideScrollBar}
+          >
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => handleCategoryClick(category.name)}
+                style={{
+                  fontWeight:
+                    category.name === selectedCategory ? "bold" : "normal",
+                  marginLeft: "10px",
+                  border: "1px solid #b6b7be",
+                  borderRadius: "4px",
+                  backgroundColor: "white",
+                  padding: "5px 15px",
+                  cursor: "pointer",
+                  height: "100%",
+                  fontSize: "17px",
+                }}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

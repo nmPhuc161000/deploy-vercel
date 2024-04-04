@@ -49,7 +49,7 @@ export const SearchList = () => {
           `${urlApi}/api/Category/get-all-category`
         );
         setCategories(response.data);
-        localStorage.setItem("categories", response.data)
+        localStorage.setItem("categories", response.data);
       } catch (error) {
         console.error(error);
       }
@@ -59,19 +59,32 @@ export const SearchList = () => {
 
   const [hoveredItem, setHoveredItem] = useState(null);
 
+  const showScrollBar = () => {
+    const container = document.querySelector(".scroll-container");
+    if (container) {
+      container.style.overflowX = "auto";
+    }
+  };
+
+  const hideScrollBar = () => {
+    const container = document.querySelector(".scroll-container");
+    if (container) {
+      container.style.overflowX = "hidden";
+    }
+  };
   return (
     <div>
       <div
         className="category-bar"
         style={{
-          marginBottom: "20px",
+          margin: "20px 0",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           height: "40px",
         }}
       >
-        <div style={{ width: "90%", height: "100%" }}>
+        <div style={{ width: "90%", height: "100%", display: "flex" }}>
           <FormControl
             sx={{ m: 1, minWidth: 120, margin: 0 }}
             style={{ height: "100%" }}
@@ -92,25 +105,32 @@ export const SearchList = () => {
               <MenuItem value={"desc"}>Decrease</MenuItem>
             </Select>
           </FormControl>
-          {categories.map((category, index) => (
-            <button
-              key={index}
-              onClick={() => handleCategoryClick(category.name)}
-              style={{
-                fontWeight: category.name === selectedCategory ? "bold" : "normal",
-                marginLeft: "10px",
-                border: "1px solid #b6b7be",
-                borderRadius: "4px",
-                backgroundColor: "white",
-                padding: "5px 15px",
-                cursor: "pointer",
-                height: "100%",
-                fontSize: "17px",
-              }}
-            >
-              {category.name}
-            </button>
-          ))}
+          <div
+            className="scroll-container"
+            onMouseOver={showScrollBar}
+            onMouseOut={hideScrollBar}
+          >
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => handleCategoryClick(category.name)}
+                style={{
+                  fontWeight:
+                    category.name === selectedCategory ? "bold" : "normal",
+                  marginLeft: "10px",
+                  border: "1px solid #b6b7be",
+                  borderRadius: "4px",
+                  backgroundColor: "white",
+                  padding: "5px 15px",
+                  cursor: "pointer",
+                  height: "100%",
+                  fontSize: "17px",
+                }}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <ResponsiveMasonry
@@ -130,7 +150,12 @@ export const SearchList = () => {
           {sortedItems.map((item, index) => (
             <Link
               to={item && item.id ? `/detail/${item.id}` : "/fallback-path"}
-              style={{ color: "black", display: "block",  margin: "0 4px", position: "relative"  }}
+              style={{
+                color: "black",
+                display: "block",
+                margin: "0 4px",
+                position: "relative",
+              }}
               onMouseEnter={() => item && setHoveredItem(item)}
               onMouseLeave={() => setHoveredItem(null)}
             >
@@ -149,16 +174,16 @@ export const SearchList = () => {
                   className="image-info"
                   style={{
                     backgroundColor: "rgba(0, 0, 0, 0.4)",
-                      padding: "8px",
-                      position: "absolute",
-                      bottom: "0",
-                      left: "0",
-                      right: "0",
-                      color: "white",
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "flex-end",
-                      justifyContent: "space-between",
+                    padding: "8px",
+                    position: "absolute",
+                    bottom: "0",
+                    left: "0",
+                    right: "0",
+                    color: "white",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
                   }}
                 >
                   <section

@@ -134,6 +134,21 @@ export default function EditArt({ itemData, setUpdateState }) {
       setIsLoading(false);
     }
   };
+
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const categoriesData = async () => {
+      try {
+        const response = await axios.get(
+          `${urlApi}/api/Category/get-all-category`
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    categoriesData();
+  }, []);
   return (
     <div>
       <a href="#popupEdit" onClick={() => setIsPopupOpen(true)}>
@@ -225,6 +240,7 @@ export default function EditArt({ itemData, setUpdateState }) {
                   <div className="popupInput">
                     <input
                       type="text"
+                      placeholder="Enter name of artwork *"
                       value={name}
                       onChange={(e) => handleName(e.target.value)}
                       maxLength={60}
@@ -247,21 +263,30 @@ export default function EditArt({ itemData, setUpdateState }) {
                       value={categoryName}
                       onChange={handleCategoryName}
                       label="Category *"
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 250, // Đặt giới hạn chiều cao tại đây
+                          },
+                        },
+                      }}
                     >
-                      <MenuItem value={"AI"}>AI</MenuItem>
-                      <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
-                      <MenuItem value={"Galaxy"}>Galaxy</MenuItem>
-                      <MenuItem value={"Landscape"}>Landscape</MenuItem>
-                      <MenuItem value={"Dragon"}>Dragon</MenuItem>
-                      <MenuItem value={"Home"}>Home</MenuItem>
+                      {categories.map((category) => (
+                        <MenuItem value={`${category.name}`}>{category.name}</MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                   <div className="popupInput">
                     <input
-                      type="text"
+                      type="number"
+                      placeholder="Enter price of artwork ($)"
                       value={price}
                       onChange={(e) => handlePrice(e.target.value)}
+                      min="0"
                     />
+                    <span style={{ fontWeight: "600", color: "#838592" }}>
+                      $
+                    </span>
                   </div>
                 </section>
               </div>

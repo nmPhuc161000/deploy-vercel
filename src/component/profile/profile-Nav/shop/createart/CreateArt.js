@@ -154,6 +154,21 @@ export default function CreateArt({ onCreate }) {
     }
   }, [token, navigate]);
 
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const categoriesData = async () => {
+      try {
+        const response = await axios.get(
+          `${urlApi}/api/Category/get-all-category`
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    categoriesData();
+  }, []);
+
   return (
     <div className="createart">
       {isLogin && (
@@ -282,19 +297,23 @@ export default function CreateArt({ onCreate }) {
                       onChange={handleCategoryName}
                       label="Category *"
                       style={{ borderRadius: "10px" }}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 250, // Đặt giới hạn chiều cao tại đây
+                          },
+                        },
+                      }}
                     >
-                      <MenuItem value={"AI"}>AI</MenuItem>
-                      <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
-                      <MenuItem value={"Galaxy"}>Galaxy</MenuItem>
-                      <MenuItem value={"Landscape"}>Landscape</MenuItem>
-                      <MenuItem value={"Dragon"}>Dragon</MenuItem>
-                      <MenuItem value={"Home"}>Home</MenuItem>
+                      {categories.map((category) => (
+                        <MenuItem value={`${category.name}`}>{category.name}</MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                   <div className="popupInput">
                     <input
                       type="number"
-                      placeholder="Enter price of artwork ($) *"
+                      placeholder="Enter price of artwork ($)"
                       onChange={(e) => handlePrice(e.target.value)}
                       min="0"
                     />
