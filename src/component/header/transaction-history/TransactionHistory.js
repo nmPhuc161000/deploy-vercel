@@ -6,7 +6,6 @@ import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
-  const [downImg, setDownImg] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -98,7 +97,7 @@ const TransactionHistory = () => {
                 </td>
                 <td>
                   <DownloadRoundedIcon
-                  className="iconDown"
+                    className="iconDown"
                     onClick={() =>
                       downloadImage(
                         transaction.url_Image,

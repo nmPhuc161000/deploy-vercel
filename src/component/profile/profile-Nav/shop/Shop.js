@@ -35,6 +35,7 @@ export const Shop = () => {
   const handleCreateArt = () => {
     setIsCreate((prev) => !prev);
   };
+
   return (
     <div className="shopUser">
       {/* hàm tạo ảnh và thêm thông tin */}
@@ -75,7 +76,11 @@ export const Shop = () => {
                       <img
                         src={item.url_Image}
                         alt=""
-                        style={{ height: "95%", width: "100%", objectFit: "cover" }}
+                        style={{
+                          height: "95%",
+                          width: "100%",
+                          objectFit: "cover",
+                        }}
                       />
                     </div>
                     <div className="cardInfor">

@@ -6,21 +6,23 @@ import urlApi from "../../../configAPI/UrlApi";
 import { useNavigate } from "react-router-dom";
 
 export default function Order() {
-  const [open, setOpen] = useState(false);
-  const avatarRef = useRef(null);
   const urlNoAva =
     "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2F499638df-cf1c-4ee7-9abf-fb51e875e6dc?alt=media&token=367643f5-8904-4be8-97a0-a794e6b76bd0";
+  const [open, setOpen] = useState(false);
+  const avatarRef = useRef(null);
+  const [hasData, setHasData] = useState(false);
+  const [order, setOrder] = useState([]);
+  const token = localStorage.getItem("token");
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedNotes, setSelectedNotes] = useState([]);
+  const navigate = useNavigate();
 
   const handleOutsideClick = (event) => {
     if (avatarRef.current && !avatarRef.current.contains(event.target)) {
       setOpen(false);
     }
   };
-
-  const [hasData, setHasData] = useState(false);
-  const [order, setOrder] = useState([]);
-  const token = localStorage.getItem("token");
-  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
     if (token) {
@@ -58,8 +60,6 @@ export default function Order() {
     }
   }, []);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const data = {
@@ -89,8 +89,6 @@ export default function Order() {
     };
   }, []);
 
-  const [selectedNotes, setSelectedNotes] = useState([]);
-  const navigate = useNavigate();
   const handleNoteClick = (note) => {
     setUnreadCount(unreadCount - 1);
     localStorage.setItem("unreadCount", unreadCount - 1);
@@ -103,6 +101,7 @@ export default function Order() {
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
     return `${hours} hours ago`;
   }
+
   return (
     <div className="order-dropdown" ref={avatarRef}>
       <div className="order" onClick={() => setOpen(!open)}>

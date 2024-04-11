@@ -5,7 +5,6 @@ import urlApi from "../../configAPI/UrlApi";
 
 export default function Revenue() {
   const [dataRevenues, setDataRevenues] = useState([]);
-
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -66,9 +65,9 @@ export default function Revenue() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Image</th>
                 <th>Name Seller</th>
                 <th>Name buyer</th>
+                <th>Image</th>
                 <th>Purchase date</th>
                 <th>Price</th>
               </tr>

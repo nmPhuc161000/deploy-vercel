@@ -10,6 +10,9 @@ export default function CheckOrder({ id }) {
   const token = localStorage.getItem("token");
   const [isLoading, setIsLoading] = useState(true);
   const [updateOrder, setUpdateOrder] = useState([]);
+  const isActive = dataRequestById.isActive;
+  const isDeleted = dataRequestById.isDeleted;
+
   useEffect(() => {
     const axiosData = async () => {
       try {
@@ -52,11 +55,7 @@ export default function CheckOrder({ id }) {
   if (!dataRequestById) {
     return <div>Không có tin nhắn từ người khác</div>;
   }
-
-  const isActive = dataRequestById.isActive;
-  const isDeleted = dataRequestById.isDeleted;
-  const statusRequest = dataRequestById.statusRequest;
-
+  
   return (
     <div className="checkorder">
       <div className="title">

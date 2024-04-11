@@ -12,6 +12,7 @@ import urlApi from "../../../../configAPI/UrlApi";
 export default function Cancel({ item, isActive, isDeleted }) {
   const [open, setOpen] = React.useState(false);
   const [reason, setReason] = useState("");
+  const token = localStorage.getItem("token");
 
   const handleClickOpen = () => {
     if (!isActive && !isDeleted) {
@@ -26,8 +27,6 @@ export default function Cancel({ item, isActive, isDeleted }) {
   const hanldReason = (e) => {
     setReason(e.target.value);
   };
-
-  const token = localStorage.getItem("token");
 
   const handleCancel = async () => {
     try {

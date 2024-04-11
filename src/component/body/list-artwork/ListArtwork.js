@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import axios from "axios";
 import urlApi from "../../../configAPI/UrlApi";
-import './ListArtwork.css'
+import "./ListArtwork.css";
 
 export const ListArtwork = ({ itemData }) => {
   console.log(itemData);

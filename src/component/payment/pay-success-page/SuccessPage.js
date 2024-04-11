@@ -3,16 +3,12 @@ import "./SuccessPage.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import axios from "axios";
 import urlApi from "../../../configAPI/UrlApi";
-import { useParams } from "react-router-dom";
 
 export default function SuccessPage() {
   const [bill, setBill] = useState([]);
   const order_Id = localStorage.getItem("order_Id");
   const token = localStorage.getItem("token");
-  const { ID } = useParams();
-  console.log("Id:", order_Id);
-  console.log("data:", bill);
-  console.log("id: ", ID);
+
   useEffect(() => {
     const billData = async () => {
       try {

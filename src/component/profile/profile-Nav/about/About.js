@@ -9,6 +9,7 @@ export default function About({ userInfor, onUpdate }) {
   const [email, setEmail] = useState(userInfor.email || "");
   const [phoneNumber, setPhone] = useState(userInfor.phoneNumber || "");
   const [address, setAddress] = useState(userInfor.address || "");
+  const token = localStorage.getItem("token");
 
   const handleFullNameChange = (value) => {
     setNickName(value);
@@ -26,7 +27,6 @@ export default function About({ userInfor, onUpdate }) {
     setAddress(value);
   };
 
-  const token = localStorage.getItem("token");
   const handleSaveClick = () => {
     const userData = {
       nickName: nickName,
@@ -51,11 +51,8 @@ export default function About({ userInfor, onUpdate }) {
       })
       .catch((error) => {
         console.error("Error:", error.request);
-        alert(error.request.response)
+        alert(error.request.response);
       });
-  };
-  const handleEditClick = () => {
-    setIsEditing(true);
   };
 
   return (
@@ -63,41 +60,40 @@ export default function About({ userInfor, onUpdate }) {
       <div className="about-container">
         <div className="about-info">
           <h4>Thông tin cá nhân</h4>
-  
+
           <div>
             <ul>
               <div className="about-left">
                 <li>
                   <label htmlFor="fullName">Nick Name:</label>
                   <div>
-                  <input
-                    type="text"
-                    value={nickName}
-                    placeholder="Nick name"
-                    onChange={(e) => handleFullNameChange(e.target.value)}
-                  />
+                    <input
+                      type="text"
+                      value={nickName}
+                      placeholder="Nick name"
+                      onChange={(e) => handleFullNameChange(e.target.value)}
+                    />
                   </div>
                 </li>
                 <li>
                   <label htmlFor="userName">Email:</label>
                   <div>
-                  <input
-                    type="text"
-                    value={email}
-                    placeholder="Email"
-                    onChange={(e) => handleEmailChange(e.target.value)}
-                  />
+                    <input
+                      type="text"
+                      value={email}
+                      placeholder="Email"
+                      onChange={(e) => handleEmailChange(e.target.value)}
+                    />
                   </div>
                 </li>
                 <li>
-                  
                   <label htmlFor="address">Phone:</label>
                   <div>
-                  <input
-                    type="text"
-                    value={phoneNumber}
-                    onChange={(e) => handlePhoneNumberChange(e.target.value)}
-                  />
+                    <input
+                      type="text"
+                      value={phoneNumber}
+                      onChange={(e) => handlePhoneNumberChange(e.target.value)}
+                    />
                   </div>
                 </li>
               </div>
@@ -105,12 +101,12 @@ export default function About({ userInfor, onUpdate }) {
                 <li>
                   <label htmlFor="address">Address:</label>
                   <div>
-                  <input
-                    type="text"
-                    value={address}
-                    placeholder="Address"
-                    onChange={(e) => handleAddressChange(e.target.value)}
-                  />
+                    <input
+                      type="text"
+                      value={address}
+                      placeholder="Address"
+                      onChange={(e) => handleAddressChange(e.target.value)}
+                    />
                   </div>
                 </li>
                 <li>
@@ -134,5 +130,5 @@ export default function About({ userInfor, onUpdate }) {
         </div>
       </div>
     </div>
-  );  
+  );
 }

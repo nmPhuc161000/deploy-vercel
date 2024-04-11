@@ -7,7 +7,8 @@ import { FaLock, FaUnlock } from "react-icons/fa";
 function Creator() {
   const [users, setUsers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  console.log("he:", users);
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +28,6 @@ function Creator() {
     fetchData();
   }, []);
 
-  const token = localStorage.getItem("token");
   const handleStatusChange = async (userId, isActive) => {
     try {
       await axios.patch(

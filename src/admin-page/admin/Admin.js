@@ -11,9 +11,12 @@ import axios from "axios";
 function Admin() {
   const [creatorUsers, setCreatorUsers] = useState();
   const [productCount, setProductCount] = useState();
-
   const [isAdd, setIsAdd] = useState([]);
   const [isDelete, setIsDelete] = useState([]);
+  const [add, setAdd] = useState("");
+  const [deleteData, setDeleteData] = useState("");
+  const token = localStorage.getItem("token");
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function fetchRegisteredUsers() {
@@ -40,7 +43,7 @@ function Admin() {
     fetchRegisteredUsers();
   }, []);
 
-  const [categories, setCategories] = useState([]);
+
 
   useEffect(() => {
     const categories = async () => {
@@ -55,10 +58,6 @@ function Admin() {
     };
     categories();
   }, [isAdd, isDelete]);
-
-  const [add, setAdd] = useState("");
-  const [deleteData, setDeleteData] = useState("");
-  const token = localStorage.getItem("token");
 
   const handleAdd = (e) => {
     setAdd(e.target.value);
@@ -109,6 +108,7 @@ function Admin() {
       console.error(error);
     }
   };
+  
   return (
     <main className="main-container">
       <div className="main-title">
@@ -140,7 +140,6 @@ function Admin() {
           </div>
           <div className="text-ad">
             <h3>REPORTS</h3>
-            <p>42</p>
           </div>
         </div>
       </div>

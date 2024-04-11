@@ -11,6 +11,7 @@ import urlApi from "../../../../configAPI/UrlApi";
 
 export default function Accept({ item, isActive, isDeleted }) {
   const [open, setOpen] = React.useState(false);
+  const token = localStorage.getItem("token");
 
   const handleClickOpen = () => {
     if (!isActive && !isDeleted) {
@@ -21,8 +22,6 @@ export default function Accept({ item, isActive, isDeleted }) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const token = localStorage.getItem("token");
 
   const handleAccept = async () => {
     try {

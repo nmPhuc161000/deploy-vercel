@@ -28,6 +28,9 @@ export default function CreateArt({ onCreate }) {
   const [imageUrl, setImageUrl] = useState("");
   const [imgName, setImgName] = useState("No selected image.");
   const [remainingCharacters, setRemainingCharacters] = useState(60);
+  const [categories, setCategories] = useState([]);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const handleName = (value) => {
     if (value.length <= 60) {
@@ -90,8 +93,6 @@ export default function CreateArt({ onCreate }) {
     });
   }, []);
 
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
   const handleSave = async () => {
     if (!name || !categoryName || !description || !price) {
       alert("Vui lòng điền đầy đủ thông tin.");
@@ -154,7 +155,6 @@ export default function CreateArt({ onCreate }) {
     }
   }, [token, navigate]);
 
-  const [categories, setCategories] = useState([]);
   useEffect(() => {
     const categoriesData = async () => {
       try {
@@ -306,7 +306,9 @@ export default function CreateArt({ onCreate }) {
                       }}
                     >
                       {categories.map((category) => (
-                        <MenuItem value={`${category.name}`}>{category.name}</MenuItem>
+                        <MenuItem value={`${category.name}`}>
+                          {category.name}
+                        </MenuItem>
                       ))}
                     </Select>
                   </FormControl>

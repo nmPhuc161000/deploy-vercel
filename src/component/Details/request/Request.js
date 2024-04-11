@@ -8,7 +8,6 @@ import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 
 export default function Request({ userById }) {
   const [username, setUsername] = useState([]);
-  const [currentTab, setCurrentTab] = useState("unread");
   const [nickName, setNickName] = useState(userById.nick_Name || "");
   const [mail, setMail] = useState("newRequest");
   const [email, setEmail] = useState(username.email || "");
@@ -16,10 +15,9 @@ export default function Request({ userById }) {
   const [text, setText] = useState("");
   const [updateData, setUpdateData] = useState([]);
   const token = localStorage.getItem("token");
-
-  const handleTabClick = (tab) => {
-    setCurrentTab(tab);
-  };
+  const [requestId, setRequestId] = useState(null);
+  const [dataReqId, setDataReqId] = useState([]);
+  const [iShow, setIsShow] = useState(false);
 
   const handleNewRequest = (tab) => {
     setMail(tab);
@@ -103,10 +101,6 @@ export default function Request({ userById }) {
     }
   }, []);
 
-  const [requestId, setRequestId] = useState(null);
-  const [dataReqId, setDataReqId] = useState([]);
-  const [iShow, setIsShow] = useState(false);
-
   useEffect(() => {
     const requestById = async () => {
       try {
@@ -175,7 +169,6 @@ export default function Request({ userById }) {
           <div style={{ width: "170px" }}>
             <button
               onClick={() => handleNewRequest("newRequest")}
-              className={currentTab === "newRequest" ? "notMail" : ""}
             >
               New request
             </button>
@@ -255,7 +248,6 @@ export default function Request({ userById }) {
                     >
                       <button
                         onClick={() => handleNewRequest("notMail")}
-                        className={currentTab === "newRequest" ? "notMail" : ""}
                         style={{
                           border: "none",
                           fontWeight: "bold",
@@ -402,8 +394,15 @@ export default function Request({ userById }) {
                           <p style={{ fontWeight: "600" }}>
                             Text result: {dataReqId.text_Result}
                           </p>
-                          <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <p style={{ fontWeight: "600", margin: "0" }}>Price: ${dataReqId.price}</p>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <p style={{ fontWeight: "600", margin: "0" }}>
+                              Price: ${dataReqId.price}
+                            </p>
                             {dataReqId.isPayment === true ? (
                               <div
                                 style={{

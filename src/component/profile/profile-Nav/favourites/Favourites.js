@@ -9,6 +9,8 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 export default function Favourites() {
   const [favourites, setFavourites] = useState([]);
   const token = localStorage.getItem("token");
+  const [hoveredItem, setHoveredItem] = useState(null);
+
   useEffect(() => {
     const favouritesData = async () => {
       try {
@@ -28,8 +30,7 @@ export default function Favourites() {
 
     favouritesData();
   }, []);
-  const [hoveredItem, setHoveredItem] = useState(null);
-  console.log(favourites);
+
   return (
     <div className="favourite">
       {/* hàm tạo ảnh và thêm thông tin */}
@@ -115,14 +116,14 @@ export default function Favourites() {
                       }}
                     >
                       <p>
-                      {item && item.price !== 0 ? (
-                        <span style={{ fontWeight: "bold" }}>
-                          ${item && item.price}
-                        </span>
-                      ) : (
-                        <span style={{ fontWeight: "bold" }}>Free</span>
-                      )}
-                    </p>
+                        {item && item.price !== 0 ? (
+                          <span style={{ fontWeight: "bold" }}>
+                            ${item && item.price}
+                          </span>
+                        ) : (
+                          <span style={{ fontWeight: "bold" }}>Free</span>
+                        )}
+                      </p>
                     </section>
                   </div>
                 )}

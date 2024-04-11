@@ -24,6 +24,7 @@ export default function TableStatus() {
   const [selectedArtworks, setSelectedArtworks] = useState([]);
   const [isAnyArtworkSelected, setIsAnyArtworkSelected] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -75,7 +76,6 @@ export default function TableStatus() {
       setSelectedArtworks([...selectedArtworks, artworkId]);
     }
   };
-  const token = localStorage.getItem("token");
 
   const handleDeleteSelectedArtworks = async () => {
     try {
@@ -179,12 +179,11 @@ export default function TableStatus() {
               <td>{getStatus(item.isActive, item.isDeleted)}</td>
               <td>
                 {item.price !== 0 ? (
-                
-                checkStatus(item.isPayment)
+                  checkStatus(item.isPayment)
                 ) : (
                   <span>Free</span>
                 )}
-                </td>
+              </td>
               <td>
                 {item.isPayment === false || item.price === 0 ? (
                   <IconButton onClick={() => handleSelectArtwork(item.id)}>

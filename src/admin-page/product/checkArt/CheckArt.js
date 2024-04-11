@@ -2,9 +2,10 @@ import React from "react";
 import Accept from "./accept/Accept";
 import Cancel from "./cancel/Cancel";
 
-export default function CheckArt({item}) {
-    const isActive = item.isActive;
-    const isDeleted = item.isDeleted;
+export default function CheckArt({ item }) {
+  const isActive = item.isActive;
+  const isDeleted = item.isDeleted;
+
   return (
     <div
       style={{
@@ -13,7 +14,7 @@ export default function CheckArt({item}) {
         justifyContent: "center",
       }}
     >
-      <Accept item={item} isActive={isActive} isDeleted={isDeleted}/>
+      <Accept item={item} isActive={isActive} isDeleted={isDeleted} />
       <span
         style={{
           height: "35.6px",
@@ -22,7 +23,7 @@ export default function CheckArt({item}) {
           margin: "0 5px",
         }}
       ></span>{" "}
-      <Cancel item={item} isActive={isActive} isDeleted={isDeleted}/>
+      <Cancel item={item} isActive={isActive} isDeleted={isDeleted} />
     </div>
   );
 }

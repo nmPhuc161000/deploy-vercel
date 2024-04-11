@@ -5,18 +5,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Avatar = () => {
+  const urlNoAva =
+    "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2F499638df-cf1c-4ee7-9abf-fb51e875e6dc?alt=media&token=367643f5-8904-4be8-97a0-a794e6b76bd0";
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState([]);
   const avatarRef = useRef(null);
-  const urlNoAva =
-    "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2F499638df-cf1c-4ee7-9abf-fb51e875e6dc?alt=media&token=367643f5-8904-4be8-97a0-a794e6b76bd0";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleOutsideClick = (event) => {
     if (avatarRef.current && !avatarRef.current.contains(event.target)) {
       setOpen(false);
     }
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const data = {

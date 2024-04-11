@@ -20,6 +20,10 @@ export default function Detail({ setUserById, statusPay }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [updateState, setUpdateState] = useState([]);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [itemData, setItemData] = useState([]);
+  const { ID } = useParams();
 
   const urlNoAva =
     "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2F499638df-cf1c-4ee7-9abf-fb51e875e6dc?alt=media&token=367643f5-8904-4be8-97a0-a794e6b76bd0";
@@ -33,7 +37,7 @@ export default function Detail({ setUserById, statusPay }) {
   const toggleFullscreen = () => {
     const imageElement = document.querySelector(".product-tumb img"); // Lấy phần tử ảnh
     if (imageElement) {
-      imageElement.style.objectFit = 'contain';
+      imageElement.style.objectFit = "contain";
       // Kiểm tra xem trình duyệt có hỗ trợ API fullscreen không
       if (imageElement.requestFullscreen) {
         // Nếu fullscreen đang được bật, tắt fullscreen
@@ -50,9 +54,6 @@ export default function Detail({ setUserById, statusPay }) {
       alert("Image element not found.");
     }
   };
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const handlePayment = (navigate, location) => {
     console.log("Redirect path:", location.pathname);
@@ -73,9 +74,6 @@ export default function Detail({ setUserById, statusPay }) {
       navigate("/login");
     }
   };
-
-  const [itemData, setItemData] = useState([]);
-  const { ID } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {

@@ -5,7 +5,7 @@ import urlApi from "../../configAPI/UrlApi";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Payment = ({ userById }) => {
+export default function Payment({ userById }) {
   const [imageSize, setImageSize] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showPaymentInfo, setShowPaymentInfo] = useState(false);
@@ -13,7 +13,6 @@ const Payment = ({ userById }) => {
   const [selfLink, setSelfLink] = useState("");
   const [approveLink, setApproveLink] = useState("");
   const [status, setStatus] = useState([]);
-  const [isPaid, setIsPaid] = useState(false);
   const token = localStorage.getItem("token");
 
   //Create payment
@@ -108,7 +107,6 @@ const Payment = ({ userById }) => {
           );
           console.log(response);
           if (response) {
-            setIsPaid(true);
             Swal.fire({
               icon: "success",
               title: "Payment successful!",
@@ -209,4 +207,3 @@ const Payment = ({ userById }) => {
   );
 };
 
-export default Payment;

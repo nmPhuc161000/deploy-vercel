@@ -14,8 +14,10 @@ export const SearchList = () => {
   const responseData = state && state.searchData;
   const responseDataArray = Array.isArray(responseData) ? responseData : [];
   const [selectedCategory, setSelectedCategory] = useState(null);
-  // const categories = ["Dragon", "Galaxy", "AI", "Landscape", "Fantasy", "Home"];
   const [sortBy, setSortBy] = useState(null);
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [categories, setCategories] = useState([]);
+  // const categories = ["Dragon", "Galaxy", "AI", "Landscape", "Fantasy", "Home"];
 
   const handleCategoryClick = (category) => {
     setSelectedCategory((prevCategory) =>
@@ -40,8 +42,7 @@ export const SearchList = () => {
     }
     return 0; // Không sắp xếp
   });
-
-  const [categories, setCategories] = useState([]);
+  
   useEffect(() => {
     const categoriesData = async () => {
       try {
@@ -56,8 +57,6 @@ export const SearchList = () => {
     };
     categoriesData();
   }, []);
-
-  const [hoveredItem, setHoveredItem] = useState(null);
 
   const showScrollBar = () => {
     const container = document.querySelector(".scroll-container");

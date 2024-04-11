@@ -6,8 +6,8 @@ import CheckArt from "./checkArt/CheckArt";
 
 export default function Product() {
   const [dataProduct, setDataProduct] = useState([]);
-
   const token = localStorage.getItem("token");
+  
   useEffect(() => {
     const productData = async () => {
       try {
@@ -39,7 +39,7 @@ export default function Product() {
   const toggleFullscreen = (event) => {
     const imageElement = event.target; // Lấy phần tử ảnh được click
     if (imageElement) {
-      imageElement.style.objectFit = 'contain';
+      imageElement.style.objectFit = "contain";
       // Kiểm tra xem trình duyệt có hỗ trợ API fullscreen không
       if (imageElement.requestFullscreen) {
         // Nếu fullscreen đang được bật, tắt fullscreen
@@ -56,7 +56,7 @@ export default function Product() {
       alert("Image element not found.");
     }
   };
-  
+
   return (
     <main className="main-container">
       <div className="main-title">
@@ -97,9 +97,13 @@ export default function Product() {
                     })}
                   </td>
                   <td>${item.price}</td>
-                  <td><textarea value={item.description}/></td>
+                  <td>
+                    <textarea value={item.description} />
+                  </td>
                   <td>{getStatus(item.isActive, item.isDeleted)}</td>
-                  <td><CheckArt item={item}/></td>
+                  <td>
+                    <CheckArt item={item} />
+                  </td>
                 </tr>
               ))}
             </tbody>

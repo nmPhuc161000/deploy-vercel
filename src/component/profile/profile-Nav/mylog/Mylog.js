@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import TableStatus from "./tablestatusart/TableStatus";
 
 export default function Mylog() {
-    let { id } = useParams();
+  let { id } = useParams();
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -16,18 +16,25 @@ export default function Mylog() {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+  
   return (
     <div className="mylog">
-      <Grid container spacing={2} sx={{width: "95%"}}>
+      <Grid container spacing={2} sx={{ width: "95%" }}>
         <Grid xs={6} md={4}>
-          <Item style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}><CheckOrder id={id}/></Item>
+          <Item
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CheckOrder id={id} />
+          </Item>
         </Grid>
         <Grid xs={6} md={8}>
-          <Item><TableStatus/></Item>
+          <Item>
+            <TableStatus />
+          </Item>
         </Grid>
       </Grid>
     </div>

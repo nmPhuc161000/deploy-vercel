@@ -21,7 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PaymentRequest({dataReqId}) {
+export default function PaymentRequest({ dataReqId }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -63,7 +63,7 @@ export default function PaymentRequest({dataReqId}) {
       setApproveLink(approveLink);
     } catch (error) {
       console.error("Error:", error);
-      alert(error.response.data + "!!!")
+      alert(error.response.data + "!!!");
     }
   };
 
@@ -129,19 +129,10 @@ export default function PaymentRequest({dataReqId}) {
           );
           console.log(response);
           if (response) {
-            Swal.fire({
-              icon: "success",
-              title: "Payment successful!",
-              showConfirmButton: false,
-              timer: 4000,
-              confirmButtonText: "OK",
-              didClose: () => {
-                setOpen(false);
-              },
-            });
+            alert("Payment request successful!");
+            setOpen(false);
             console.log("data: ", response.data);
-            localStorage.setItem("order_Id", response.data.order_Id)
-            alert("Payment successful!");
+            localStorage.setItem("order_Id", response.data.order_Id);
           } else {
             Swal.fire({
               icon: "error",

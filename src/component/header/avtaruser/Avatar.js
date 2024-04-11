@@ -11,11 +11,13 @@ import axios from "axios";
 const Avatar = () => {
   const [open, setOpen] = useState(false);
   const [nickName, setNickName] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const avatarRef = useRef(null);
   const urlNoAva =
     "https://firebasestorage.googleapis.com/v0/b/artwork-platform.appspot.com/o/logo%2F499638df-cf1c-4ee7-9abf-fb51e875e6dc?alt=media&token=367643f5-8904-4be8-97a0-a794e6b76bd0";
 
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     setOpen(false);
@@ -39,7 +41,7 @@ const Avatar = () => {
       setOpen(false);
     }
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const data = {

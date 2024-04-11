@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function Login() {
   const urlLogo =
@@ -56,10 +56,10 @@ export default function Login() {
       localStorage.setItem("token", newToken);
       // Hiển thị thông báo thành công khi đăng nhập thành công
       Swal.fire({
-        icon: 'success',
-        title: 'Login successful!',
+        icon: "success",
+        title: "Login successful!",
         showConfirmButton: false,
-        timer: 1300 // Tắt sau 2 giây
+        timer: 1300, // Tắt sau 2 giây
       });
     } catch (error) {
       console.error(
@@ -68,12 +68,11 @@ export default function Login() {
       );
       // Hiển thị thông báo lỗi khi đăng nhập thất bại
       Swal.fire({
-        icon: 'error',
-        title: 'Login failed!',
+        icon: "error",
+        title: "Login failed!",
         text: error.response.data,
       });
-    }
-    finally {
+    } finally {
       setIsLoading(false); // Đặt isLoading thành false sau khi xử lý hoàn tất
     }
   };
@@ -90,6 +89,7 @@ export default function Login() {
         <h6>please login to your account</h6>
         <form onSubmit={handleSubmit}>
           <div className="group">
+            <span style={{ fontSize: "15px" }}>Username*</span>
             <input
               type="text"
               placeholder="Username"
@@ -98,6 +98,7 @@ export default function Login() {
             />
           </div>
           <div className="group">
+            <span style={{ fontSize: "15px" }}>Password*</span>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"

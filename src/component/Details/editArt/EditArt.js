@@ -272,7 +272,9 @@ export default function EditArt({ itemData, setUpdateState }) {
                       }}
                     >
                       {categories.map((category) => (
-                        <MenuItem value={`${category.name}`}>{category.name}</MenuItem>
+                        <MenuItem value={`${category.name}`}>
+                          {category.name}
+                        </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
@@ -293,7 +295,11 @@ export default function EditArt({ itemData, setUpdateState }) {
 
               <div
                 className="popupInput"
-                style={{ border: "none", flexDirection: "column", marginTop: "15px", }}
+                style={{
+                  border: "none",
+                  flexDirection: "column",
+                  marginTop: "15px",
+                }}
               >
                 <section
                   style={{
